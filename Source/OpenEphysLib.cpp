@@ -36,33 +36,33 @@ using namespace Plugin;
 
 #define NUM_PLUGINS 1
 
-extern "C" EXPORT void getLibInfo(Plugin::LibraryInfo* info)
+extern "C" EXPORT void getLibInfo(Plugin::LibraryInfo *info)
 {
 	/* API version, defined by the GUI source.
 	Should not be changed to ensure it is always equal to the one used in the latest codebase.
 	The GUI refueses to load plugins with mismatched API versions */
 	info->apiVersion = PLUGIN_API_VER;
-	info->name = "Plugin Library Name"; // <---- update
-	info->libVersion = "0.1.0"; // <---- update
+	info->name = "Root Mean Square";
+	info->libVersion = "0.1.0";
 	info->numPlugins = NUM_PLUGINS;
 }
 
-extern "C" EXPORT int getPluginInfo(int index, Plugin::PluginInfo* info)
+extern "C" EXPORT int getPluginInfo(int index, Plugin::PluginInfo *info)
 {
 	switch (index)
 	{
-		//one case per plugin. This example is for a processor which connects directly to the signal chain
+		// one case per plugin. This example is for a processor which connects directly to the signal chain
 	case 0:
-		//Type of plugin. See "Source/Processors/PluginManager/OpenEphysPlugin.h" for complete info about the different type structures
+		// Type of plugin. See "Source/Processors/PluginManager/OpenEphysPlugin.h" for complete info about the different type structures
 		info->type = Plugin::Type::PROCESSOR;
 
-		//Processor name
-		info->processor.name = "Plugin Name"; //Processor name shown in the GUI
+		// Processor name
+		info->processor.name = "Root Mean Square"; // Processor name shown in the GUI
 
-		//Type of processor. Can be FILTER, SOURCE, SINK or UTILITY. Specifies where on the processor list will appear
+		// Type of processor. Can be FILTER, SOURCE, SINK or UTILITY. Specifies where on the processor list will appear
 		info->processor.type = Processor::Type::FILTER;
 
-		//Class factory pointer. Replace "ProcessorPluginSpace::ProcessorPlugin" with the namespace and class name.
+		// Class factory pointer. Replace "ProcessorPluginSpace::ProcessorPlugin" with the namespace and class name.
 		info->processor.creator = &(Plugin::createProcessor<ProcessorPlugin>);
 		break;
 	default:
@@ -74,8 +74,8 @@ extern "C" EXPORT int getPluginInfo(int index, Plugin::PluginInfo* info)
 
 #ifdef WIN32
 BOOL WINAPI DllMain(IN HINSTANCE hDllHandle,
-	IN DWORD     nReason,
-	IN LPVOID    Reserved)
+					IN DWORD nReason,
+					IN LPVOID Reserved)
 {
 	return TRUE;
 }

@@ -22,10 +22,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "ProcessorPluginEditor.h"
 
-ProcessorPluginEditor::ProcessorPluginEditor(GenericProcessor* parentNode) 
+ProcessorPluginEditor::ProcessorPluginEditor(GenericProcessor *parentNode)
     : GenericEditor(parentNode)
 {
 
     desiredWidth = 150;
-
+    addTextBoxParameterEditor("window_ms", 10, 62);
+    addSelectedChannelsParameterEditor("Channels", 10, 108);
 }
